@@ -18,7 +18,7 @@
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
-	
+		홀리쉿
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
 

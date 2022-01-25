@@ -43,7 +43,7 @@ public class UserRestController {
 		
 	}
 	
-	@PostMapping("/sign_in")
+	@PostMapping("/user/sign_in")
 	public Map<String, String> singIn(
 			
 			@RequestParam("loginId") String loginId,
@@ -56,13 +56,14 @@ public class UserRestController {
 		Map<String, String> result = new HashMap<>();
 		if(user != null) {
 			result.put("result","success");
-			
 			//성공시 세션 부여
 			HttpSession session =  request.getSession();
 			//id, loginId, name 
 			session.setAttribute("userId", user.getId());
 			session.setAttribute("userLoginId", user.getLoginId());
 			session.setAttribute("userName", user.getName());
+			
+			
 			
 		} else {
 			result.put("result","fail");

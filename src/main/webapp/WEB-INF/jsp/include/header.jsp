@@ -12,7 +12,7 @@
 				</c:when>
 				
 				<c:otherwise>
-					<div class="mr-3">"${userName }" <a href="/user/signin_view">로그인</a></div>
+					<div class="mr-3"> <a href="/user/signin_view">로그인</a></div>
 				
 				</c:otherwise>
 			

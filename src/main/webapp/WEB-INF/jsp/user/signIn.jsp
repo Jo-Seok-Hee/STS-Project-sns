@@ -25,6 +25,7 @@
 				<input type="text" class="form-control mt-3" placeholder="아이디" id="loginIdInput" >
 				<input type="password" class="form-control mt-3" placeholder="비밀번호" id="passwordInput">
 				<button type="button" id="joinBtn" class="btn btn-info btn-block mt-3">로그인</button>
+				<button type="button" id="joinBtn" class="btn btn-primary btn-block mt-3"><a href="/user/signup_view" class="text-white">회원가입</a></button>
 			</div>
 		</section>
 		
@@ -33,7 +34,44 @@
 	</div>
 	<script>
 		$(document).ready(function(){
-			
+			$("#joinBtn").on("click", function() {
+				var loginId = $("#loginIdInput").val();
+				var password = $("#passwordInput").val();
+				
+				if(loginId == "") {
+					alert("아이디를 입력하세요");
+					return;
+				}
+				
+				if(password == "") {
+					alert("비밀번호를 입력하세요");
+					return;
+				}
+				
+				
+				
+				
+				
+				$.ajax({
+					type:"post",
+					url:"/user/sign_in",
+					data:{"loginId":loginId, "password":password },
+					success:function(data) {
+						if(data.result == "success") {
+							// 로그인 화면으로 이동
+							location.href = "/post/list_view";
+							
+						} else {
+							alert("아이디와 비밀번호가 잘못되었씁니다.");
+						}
+					}, 
+					error:function() {
+						alert("에러 발생");
+					}
+				});
+				
+				
+			});
 			
 		});
 	
