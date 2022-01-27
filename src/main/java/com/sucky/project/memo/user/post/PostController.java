@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PostController {
 	@GetMapping("/post/list_view")
 	public String listView() {
-		return "/user/postList";
+		return "/user/createView";
 	}
 }
