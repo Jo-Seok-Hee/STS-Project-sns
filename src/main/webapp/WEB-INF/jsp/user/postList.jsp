@@ -18,7 +18,41 @@
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
-		홀리쉿
+		<section class="d-flex justify-content-center">
+			<div class="w-75">
+			
+				<table>
+					<thead>
+						<tr>
+							<th>No.</th>
+							<th>제목</th>
+							<th>시간</th>	
+						</tr>
+					</thead>
+					<tbody>
+						<%-- 반복 시작 --%>
+						<tr>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+						</tr>
+						<%-- 반복 끝 --%>
+					</tbody>
+				
+				
+				
+				
+				
+				
+				</table>
+			
+			</div>
+		
+		
+		</section>
+		
+		
+		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	</div>
 
