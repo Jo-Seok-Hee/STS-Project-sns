@@ -11,12 +11,12 @@ import com.sucky.project.memo.user.model.Post;
 @Service
 public class PostVO {
 	
-	
 	@Autowired
 	private PostDAO postDAO;
-	public int addPost(int id,String subject, String content) {
+	
+	public int addPost(int userId, String subject, String content) {
 		
-		return postDAO.insertPost(id,subject, content);
+		return postDAO.insertPost(userId, subject, content);
 	}
 	
 	public List<Post> getPost(int userId){

@@ -46,44 +46,42 @@
 	</div>
 	
 	<script>
-	
-		$(document).ready(function(){
-			
-			$("#saveBtn").on("clicl",function(){
-				
-				let title  =  $("#titleInput").val();
+		$(document).ready(function() {
+			$("#saveBtn").on("click", function() {
+				let title = $("#titleInput").val();
 				let content = $("#contentInput").val().trim();
 				
-				if(title == ""){
+				if(title == "") {
 					alert("제목을 입력하세요");
-					return ; 
-				}
-				
-				if(content == ""){
-					alert("내용을 입력하세요.");
 					return ;
 				}
 				
-			});
-			
-			$.ajax({
-				//tudse
-				type:"post",
-				url:"/post/create",
-				data:{"subject":title, "content":content},
-				success:function(data){
-					if(data.result =="success"){
-						location.href="/post/listView";
-					} else {
-						alert("글쓰기 실패")
-					}
-				},
-				error:function(){
-					alert("에러 발생");
+				if(content == "") {
+					alert("내용을 입력하세요");
+					return ;
 				}
-			})
-			
-			
+				
+				
+				
+				$.ajax({
+					type:"post",
+					url:"/post/create",
+					data:{"subject":title, "content":content},
+					success:function(data) {
+						if(data.result == "success") {
+							location.href="/post/listView";
+						} else {
+							alert("글쓰기 실패");
+						}
+					},
+					error:function() {
+						alert("에러발생");
+					}
+				})
+				
+				
+				
+			});
 		});
 	
 	</script>

@@ -18,7 +18,7 @@ public class UserController {
 		return "/user/signUp";
 	}
 	
-	@GetMapping("/user/signin_view")
+	@GetMapping("/user/memo")
 	public String signInView() {
 		return "/user/signIn";
 	}
@@ -32,6 +32,6 @@ public class UserController {
 		session.removeAttribute("userLoginId");
 		session.removeAttribute("userName");
 		
-		return "redirect:/user/signin_view";
+		return "redirect:/user/memo";
 	}
 }

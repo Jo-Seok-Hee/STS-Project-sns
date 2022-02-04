@@ -5,25 +5,23 @@
  
  <mapper namespace="com.sucky.project.memo.user.dao.PostDAO">
  
- 	<insert id="insertPost" parameterType="map">
- 		INSERT INTO `post`
- 		(
- 			`userId`
- 			, `subject`
- 			, `content`
- 			, `createdAt`
- 			, `updatedAt`
-		)
-		VALUE
+	<insert id="insertPost" parameterType="map">
+		INSERT INTO `post` 
 		(
+			`userId`
+			, `subject`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		) VALUES (
 			#{userId}
 			, #{subject}
 			, #{content}
 			, now()
 			, now()
 		)
-
- 	</insert>
+	
+	</insert>
  	<select id="selectPostList" resultType="com.sucky.project.memo.user.model.Post">
  		SELECT
  			`id`

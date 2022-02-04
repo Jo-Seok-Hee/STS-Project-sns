@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
+출처: https://cofs.tistory.com/262 [CofS]
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,9 +23,9 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
 		<section class="d-flex justify-content-center">
-			<div class="w-75">
+			<div class="w-75 text-center">
 			
-				<table>
+				<table class="table">
 					<thead>
 						<tr>
 							<th>No.</th>
@@ -30,12 +34,26 @@
 						</tr>
 					</thead>
 					<tbody>
+						
 						<%-- 반복 시작 --%>
-						<tr>
-							<td>1</td>
-							<td>2</td>
-							<td>3</td>
-						</tr>
+						<c:forEach var="postlist" items="${postList }" varStatus="status">
+							<tr>
+								<td>${postlist.id }</td>
+								<td>
+									<c:set var="titleLength" value="${postlist.subject }"/>
+									<c:choose>
+									
+										<c:when test="${fn:length(titleLength) gt 15}">
+											${fn:substring(titleLength,0,15) }..
+										</c:when>
+										<c:otherwise>
+											${postlist.subject }
+										</c:otherwise>
+									</c:choose>
+								</td>
+								<td><fmt:formatDate value="${postlist.createdAt }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+							</tr>
+						</c:forEach>
 						<%-- 반복 끝 --%>
 					</tbody>
 				
@@ -45,6 +63,10 @@
 				
 				
 				</table>
+				
+				<div class="d-flex justify-content-end m-3">
+					<a href="/post/postView" class="btn btn-info">글쓰기</a>
+				</div>
 			
 			</div>
 		

@@ -1,24 +1,39 @@
 package com.sucky.project.memo.user.post;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.sucky.project.memo.user.model.Post;
+import com.sucky.project.memo.user.vo.PostVO;
 
 @Controller
 public class PostController {
+	
+	@Autowired
+	private PostVO postVO;
+	
 	@GetMapping("/post/postView")
 	public String listView() {
-		return "/user/createView";
+		return "/post/createView";
 	}
 	
 	@GetMapping("/post/listView")
-	public String postView(HttpServletRequest request) {
+	public String postView(HttpServletRequest request,Model model) {
 		
 		HttpSession session =  request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		List<Post> postList = postVO.getPost(userId);
+		model.addAttribute("postList", postList);
 		
 		
-		return "/user/postList";
+		return "/post/postList";
 	}
 }
