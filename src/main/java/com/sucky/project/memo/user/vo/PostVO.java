@@ -34,6 +34,8 @@ public class PostVO {
 	}
 	
 	public int deletePost(int postId) {
+		Post post = postDAO.selectPostId(postId);
+		FileManagerService.removeFile(post.getImagePath());
 		return postDAO.deletePost(postId);
 	}
 }
