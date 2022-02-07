@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sucky.project.memo.user.model.User;
 import com.sucky.project.memo.user.vo.PostVO;
@@ -26,7 +27,7 @@ public class PostRestController {
 	public Map<String, String> postCreate(
 			@RequestParam("subject") String subject,
 			@RequestParam("content") String content,
-			
+			@RequestParam("file") MultipartFile file,
 			HttpServletRequest request
 			){
 		
@@ -35,7 +36,7 @@ public class PostRestController {
 		// 현재 로그인된 사용자의 user table id(pk)
 		int userId = (Integer)session.getAttribute("userId");
 		
-		int count = postVO.addPost(userId, subject, content);
+		int count = postVO.addPost(userId, subject, content, file);
 		
 		Map<String, String> result = new HashMap<>();
 		

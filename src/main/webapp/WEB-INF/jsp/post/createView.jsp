@@ -70,6 +70,10 @@
 					type:"post",
 					url:"/post/create",
 					data:formData,
+					
+					<%--enctype:"mutipart/form-data",
+					processData:false, 
+					contentType:false, --%>
 					enctype:"mutipart/form-data",
 					processData:false, 
 					contentType:false,

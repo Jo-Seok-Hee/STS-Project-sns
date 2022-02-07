@@ -30,6 +30,11 @@
 					<input type="text" class="form-control col-10" value="${post.subject }">
 				</div>
 				<textarea class="form-control mt-3" rows="5">${post.content }</textarea>
+				<div class="mt-3">
+					<img src="${post.imagePath }" class="w-100">
+				</div>
+				
+				
 				
 				<div class="d-flex justify-content-between mt-3">
 					<a href="/post/listView" class="btn btn-info">목록으로</a>

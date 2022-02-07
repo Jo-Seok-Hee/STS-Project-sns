@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.sucky.project.common.FileManagerService;
 import com.sucky.project.memo.user.dao.PostDAO;
 import com.sucky.project.memo.user.model.Post;
 
@@ -14,9 +16,12 @@ public class PostVO {
 	@Autowired
 	private PostDAO postDAO;
 	
-	public int addPost(int userId, String subject, String content) {
+	public int addPost(int userId, String subject, String content, MultipartFile file) {
 		
-		return postDAO.insertPost(userId, subject, content);
+		//파일을 서버에 저장하고, 브라우저가 접근 가능한 주소를 생성
+		String filePath = FileManagerService.saveFile(userId, file);
+		
+		return postDAO.insertPost(userId, subject, content, filePath);
 	}
 	
 	public List<Post> getPost(int userId){
