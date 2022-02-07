@@ -4,7 +4,7 @@
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-출처: https://cofs.tistory.com/262 [CofS]
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,9 +23,9 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
 		<section class="d-flex justify-content-center">
-			<div class="w-75 text-center">
-			
-				<table class="table">
+			<div class="w-75 text-center my-5">
+				<h1 class="text-center">메모 리스트</h1>
+				<table class="table mt-3">
 					<thead>
 						<tr>
 							<th>No.</th>
@@ -40,16 +40,18 @@
 							<tr>
 								<td>${postlist.id }</td>
 								<td>
-									<c:set var="titleLength" value="${postlist.subject }"/>
-									<c:choose>
-									
-										<c:when test="${fn:length(titleLength) gt 15}">
-											${fn:substring(titleLength,0,15) }..
-										</c:when>
-										<c:otherwise>
-											${postlist.subject }
-										</c:otherwise>
-									</c:choose>
+									<a href="/post/listContentView?postId=${postlist.id }" class="text-dark">
+										<c:set var="titleLength" value="${postlist.subject }"/>
+										<c:choose>
+										
+											<c:when test="${fn:length(titleLength) gt 15}">
+												${fn:substring(titleLength,0,15) }..
+											</c:when>
+											<c:otherwise>
+												${postlist.subject }
+											</c:otherwise>
+										</c:choose>
+									</a>
 								</td>
 								<td><fmt:formatDate value="${postlist.createdAt }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 							</tr>

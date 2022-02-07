@@ -23,4 +23,12 @@ public class PostVO {
 		
 		return postDAO.selectPostList(userId);
 	}
+	
+	public Post getPostContent(int postId) {
+		return postDAO.selectPostId(postId);
+	}
+	
+	public int deletePost(int postId) {
+		return postDAO.deletePost(postId);
+	}
 }

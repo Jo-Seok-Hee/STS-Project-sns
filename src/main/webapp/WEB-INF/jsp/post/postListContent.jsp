@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+       <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +14,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	
 	<link rel="stylesheet" href="/static/css/style.css" type="text/css">
-<title>글쓰기</title>
+<title>게시글 내용</title>
 </head>
 <body>
 	<div id="wrap">
@@ -20,76 +22,62 @@
 		
 		<section class="d-flex justify-content-center">
 			<div class="w-75 my-5">
-				<h1 class="text-center">메모 입력</h1>
-				<div class="d-flex mt-3"> 
-					<label class="mr-2">제목 : </label>
-					<input type="text" class="form-control col-11" id="titleInput">
+				<h1 class="text-center">메모 보기</h1>
+				
+				<%-- 제목, 내용 박스 --%>
+				<div class="d-flex mt-3">
+					<div class="mr-2">제목: </div>
+					<input type="text" class="form-control col-10" value="${post.subject }">
 				</div>
-				<textarea class="form-control mt-3" rows="5" id="contentInput"></textarea>
-				<input type="file" class="mt-3" id="fileInput">
+				<textarea class="form-control mt-3" rows="5">${post.content }</textarea>
+				
 				<div class="d-flex justify-content-between mt-3">
 					<a href="/post/listView" class="btn btn-info">목록으로</a>
-					<button type="button" class="btn btn-success" id="saveBtn">저장</button>
+					<button type="button" class="btn btn-danger" id="deleteBtn" data-post-id="${post.id }">글 삭제</button>
 					
 				</div>
-			
+				
 			</div>
+			
 			
 		
 		
 		</section>
 		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
-	
-	
+		
 	
 	</div>
-	
 	<script>
+	
+	
 		$(document).ready(function() {
-			$("#saveBtn").on("click", function() {
-				let title = $("#titleInput").val();
-				let content = $("#contentInput").val().trim();
+			
+			$("#deleteBtn").on("click", function() {
 				
-				if(title == "") {
-					alert("제목을 입력하세요");
-					return ;
-				}
-				
-				if(content == "") {
-					alert("내용을 입력하세요");
-					return ;
-				}
-				
-				var formData = new FormData();
-				formData.append("subject",title);
-				formData.append("content",content);
-				formData.append("file",$("#fileInput")[0].files[0]);
+				let postId = $(this).data("post-id");
 				
 				$.ajax({
-					type:"post",
-					url:"/post/create",
-					data:formData,
-					enctype:"mutipart/form-data",
-					processData:false, 
-					contentType:false,
+					type:"get",
+					url:"/post/delete",
+					data:{"postId":postId},
 					success:function(data) {
 						if(data.result == "success") {
 							location.href="/post/listView";
 						} else {
-							alert("글쓰기 실패");
+							alert("삭제 실패");
 						}
 					},
 					error:function() {
 						alert("에러발생");
 					}
-				})
-				
-				
-				
+					
+				});
 			});
-		});
+		});	
+	
 	
 	</script>
+	
 </body>
 </html>

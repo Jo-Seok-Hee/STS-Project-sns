@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sucky.project.memo.user.model.Post;
 import com.sucky.project.memo.user.vo.PostVO;
@@ -35,5 +36,17 @@ public class PostController {
 		
 		
 		return "/post/postList";
+		
+	}
+	
+	@GetMapping("/post/listContentView")
+	public String listContentView(@RequestParam("postId")int postId,Model model) {
+		
+		Post post = postVO.getPostContent(postId);
+		model.addAttribute("post", post);
+		
+		
+		
+		return "/post/postListContent";
 	}
 }
