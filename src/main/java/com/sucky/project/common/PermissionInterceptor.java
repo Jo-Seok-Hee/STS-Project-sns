@@ -28,7 +28,7 @@ public class PermissionInterceptor implements HandlerInterceptor{
 			
 			//로그인 화면과, 회원가입화면 접근 ??
 			if(uri.startsWith("/user/")) {
-				response.sendRedirect("/post/listContentView");
+				response.sendRedirect("/post/listView");
 				return false;
 			}
 			
